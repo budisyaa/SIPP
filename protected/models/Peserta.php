@@ -18,6 +18,14 @@ class Peserta extends CActiveRecord
         }
     }
 
+ public function formatStatus() {
+        if ($this->STATUS == 0)
+            return "Pending";
+        else if ($this->STATUS == 1)
+            return "Diterima";
+        else
+        	return "Ditolak";
+    }
 
     public function encrypt($value) {
         return md5($value);
@@ -27,8 +35,9 @@ class Peserta extends CActiveRecord
 	{
 		
 		return array(
+			array('status_peserta', 'numerical', 'integerOnly' => true),
 			array('NAMA, NO_ID, JUDUL, ASAL_INS, BIDANG, PEKERJAAN, ALAMAT, LOKASI_PT, PENANGGUNG_JAWAB, JENIS_KELAMIN, FOTO_PESERTA, username, password, EMAIL, STATUS, TEMPAT_LAHIR, code_reg', 'length', 'max'=>1024),
-			array('NO_HP', 'length', 'max'=>8),
+			array('NO_HP', 'length', 'max'=>13),
 			array('MASA_BERLAKU_AWAL, MASA_BERLAKU_AKHIR, TANGGAL_MODIFIKASI, TANGGAL_LAHIR', 'safe'),
 			
 			array('ID_PESERTA, NAMA, NO_ID, JUDUL, ASAL_INS, BIDANG, PEKERJAAN, ALAMAT, LOKASI_PT, PENANGGUNG_JAWAB, JENIS_KELAMIN, FOTO_PESERTA, username, password, NO_HP, EMAIL, STATUS, MASA_BERLAKU_AWAL, MASA_BERLAKU_AKHIR, TANGGAL_MODIFIKASI, TEMPAT_LAHIR, TANGGAL_LAHIR', 'safe', 'on'=>'search'),
@@ -97,6 +106,7 @@ public function randomCode() {
 			'TEMPAT_LAHIR' => 'Tempat Lahir',
 			'TANGGAL_LAHIR' => 'Tanggal Lahir',
 			'code_reg' => 'Kode Registrasi',
+			'status_peserta' => 'Status Peserta',
 		);
 	}
 
@@ -128,7 +138,8 @@ public function randomCode() {
 		$criteria->compare('TANGGAL_MODIFIKASI',$this->TANGGAL_MODIFIKASI,true);
 		$criteria->compare('TEMPAT_LAHIR',$this->TEMPAT_LAHIR,true);
 		$criteria->compare('TANGGAL_LAHIR',$this->TANGGAL_LAHIR,true);
-
+		$criteria->compare('status_peserta',$this->status_peserta,true);
+		$criteria->compare('code_reg',$this->code_reg,true);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

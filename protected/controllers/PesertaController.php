@@ -38,6 +38,41 @@ class PesertaController extends Controller
 		));
 	}
 
+	public function actionPeserta()
+	{
+		IsAuth::Admin();
+		$model=new Peserta('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Peserta']))
+			$model->attributes=$_GET['Peserta'];
+
+		$this->render('peserta',array(
+			'model'=>$model,
+		));
+	}
+
+	public function actionUpdatestatus($id)
+	{
+		IsAuth::Admin();
+		
+		$model=$this->loadModel($id);
+
+		
+		if(isset($_POST['Peserta']))
+		{
+			$model->attributes=$_POST['Peserta'];
+			$model->MASA_BERLAKU_AWAL= new CDbExpression('NOW()');
+			$model->MASA_BERLAKU_AKHIR=date('Y-m-d', strtotime("+3 months"));
+			//$model->MASA_BERLAKU_AKHIR= new CDbExpression('NOW()');
+			if($model->save()){
+			}
+				$this->redirect(array('view','id'=>$model->ID_PESERTA));
+		}
+
+		$this->render('updatestatus',array(
+			'model'=>$model,
+		));
+	}
 	
 	public function actionUpdate($id)
 	{
@@ -49,11 +84,17 @@ class PesertaController extends Controller
 		if(isset($_POST['Peserta']))
 		{
 			$model->attributes=$_POST['Peserta'];
+			$model->MASA_BERLAKU_AWAL= new CDbExpression('NOW()');
+			$model->MASA_BERLAKU_AKHIR=date('Y-m-d', strtotime("+3 months"));
+			//$model->MASA_BERLAKU_AKHIR= new CDbExpression('NOW()');
 			$model->FOTO_PESERTA=CUploadedFile::getInstance($model,'FOTO_PESERTA');
-			if($model->save())
+			if($model->save()){
 				$model->FOTO_PESERTA->saveAs(Yii::app()->basePath . self::URLUPLOAD . $model->FOTO_PESERTA . '');
+			}
 				$this->redirect(array('view','id'=>$model->ID_PESERTA));
 		}
+
+
 
 		$this->render('update',array(
 			'model'=>$model,

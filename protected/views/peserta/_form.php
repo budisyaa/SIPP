@@ -109,7 +109,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'NO_HP'); ?>
-		<?php echo $form->textField($model,'NO_HP',array('size'=>8,'maxlength'=>8)); ?>
+		<?php echo $form->textField($model,'NO_HP',array('size'=>13,'maxlength'=>13)); ?>
 		<?php echo $form->error($model,'NO_HP'); ?>
 	</div>
 
@@ -151,6 +151,13 @@
 		<?php echo $form->labelEx($model,'TANGGAL_LAHIR'); ?>
 		<?php echo $form->dateField($model,'TANGGAL_LAHIR'); ?>
 		<?php echo $form->error($model,'TANGGAL_LAHIR'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'status_peserta'); ?>
+		<?php echo $form->dropDownList($model,'status_peserta',
+			array('0'=>'aktif','1'=>'tidak aktif'),
+			array('empty'=>'--status--')); ?>
 	</div>
 
 	<div class="row buttons">

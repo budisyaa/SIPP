@@ -25,7 +25,7 @@
           <li class="dropdown ">
               <a href="#" data-description="6 styles" class="dropdown-toggle" data-toggle="dropdown">Styles <b class="caret"></b></a>
               <ul class="dropdown-menu style-switcher">
-                <li><a href="javascript:chooseStyle('none', 60)" checked="checked"><span class="style" style="background-color:#0088CC;"></span> Style 1</a></li>
+                <li><a href="javascript:chooseStyle('none', 60)" checked="checked"><span class="style" style="background-color:#e42e5d;"></span> Style 1</a></li>
                 <li><a href="javascript:chooseStyle('style2', 60)"><span class="style" style="background-color:#e42e5d;"></span> Style 2</a></li>
                 <li><a href="javascript:chooseStyle('style3', 60)"><span class="style" style="background-color:#c80681;"></span> Style 3</a></li>
                 <li><a href="javascript:chooseStyle('style4', 60)"><span class="style" style="background-color:#51a351;"></span> Style 4</a></li>

@@ -42,6 +42,23 @@ class AkunController extends Controller
         }
     }
 
+    public function actionDaftar() {
+        $model = new Peserta;
+        if (isset($_POST['Peserta'])) {
+            $model->attributes = $_POST['Peserta'];
+            $model->FOTO_PESERTA=CUploadedFile::getInstance($model,'FOTO_PESERTA');
+            $model->status_peserta='1';
+            $model->TANGGAL_MODIFIKASI= new CDbExpression('NOW()');
+            $model->STATUS='0';
+            if ($model->save()) {
+            $model->FOTO_PESERTA->saveAs(Yii::app()->basePath . self::URLUPLOAD . $model->FOTO_PESERTA . '');
+            $this->redirect(array('proposal/'));
+            }
+        }
+        $this->render('daftar', array("model" => $model));
+    }
+
+
     public function actionUbahprofil() {
         /* untuk cek apakah user telah login atau belum */
         IsAuth::Peserta();

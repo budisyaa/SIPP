@@ -2,7 +2,7 @@
   <input class="input-block-level" id="appendedInput" placeholder="Search..." type="text">
 </div>
 
-<h3>Categories</h3>
+<h3>Categorieasasasas</h3>
 
 <ul class="nav nav-list">
   <li class="active"><a href="#">Tutorials</a></li>

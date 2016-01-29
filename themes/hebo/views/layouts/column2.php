@@ -19,10 +19,7 @@
 
 	</div><!--/span-->
     
-    <div class="span2">
-		<?php include_once('tpl_sidebar.php');?>
-		
-    </div><!--/span-->
+    
   </div><!--/row-->
 </div>
 </section>
