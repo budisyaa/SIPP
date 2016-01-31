@@ -16,12 +16,18 @@ class PesertaLogin extends CUserIdentity {
         /* find data dengan atribut username
          * menggunakan model Admin */
         $user = Peserta::model()->findByAttributes(array('username' => $this->username));
+        $status = Peserta::model()->findByAttributes(array('status_peserta' => '1', 'username' =>$this->username));
         /* jika user hasilnya null maka
          * kasih error invalid username */
         if ($user === null) {
             $this->errorCode = self::ERROR_USERNAME_INVALID;
             /* jika tidak null */
-        } else {
+        } 
+        else if($status !=null)
+        {
+                $this->errorCode = self::ERROR_USERNAME_INVALID;
+        }
+        else{
             /* cek jika password yang ada didalam database
              * tidak sama dengan password yang dienkrip maka
              * kasih error password invalid */
